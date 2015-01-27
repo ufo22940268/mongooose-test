@@ -33,7 +33,7 @@ A few test helper to make testing mongoose easier.
         c: {type: String, required: true, enum: ['hongbosb', 'shijiesb']}
     }))
     var mongooseTest = require('mongoose-test')
-    mongooseTest.insertData(RequireStringDummy, [{a: 1}, {a: 2}], function (err) {
+        mongooseTest.insertData(RequireStringDummy, [{a: 1}, {a: 2}], function (err) {
     }
 
 ```
