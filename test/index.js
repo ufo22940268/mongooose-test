@@ -27,7 +27,7 @@ var uniqueId = 'c90b6960-0109-11e2-9595-00248c45df8a'
         a: Number,
         b: {type: Boolean, required: true}
     }))
-    , dboperator = require('../dboperator.js')
+    , dboperator = require('../lib/dboperator.js')
 
 mongoose.connect(dbURI)
 
