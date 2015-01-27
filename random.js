@@ -20,8 +20,12 @@ var random = {
         return str;
     },
 
-    randomString: function () {
-        return this._randonString(10, "B")
+    randomString: function (options) {
+        if (!options || !options.enum) {
+            return this._randonString(10, "B")
+        } else {
+            return options.enum[parseInt(options.enum.length * Math.random())]
+        }
     },
 
     randomDate: function () {

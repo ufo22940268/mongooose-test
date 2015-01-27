@@ -3,7 +3,7 @@ var uniqueId = 'c90b6960-0109-11e2-9595-00248c45df8a'
     , dbURI = 'mongodb://localhost/mongodb-wiper-test-' + uniqueId
     , expect = require('chai').expect
     , mongoose = require('mongoose')
-    , ObjectIdSchema = mongoose.Schema.Types.ObjectId
+    , ObjectIdSchema = mongoose.Schema.ObjectId
     , ObjectId = mongoose.Types.ObjectId
     , RequireNumberDummy = mongoose.model('DummyNumberRequired', new mongoose.Schema({
         a: Number,
@@ -11,7 +11,8 @@ var uniqueId = 'c90b6960-0109-11e2-9595-00248c45df8a'
     }))
     , RequireStringDummy = mongoose.model('DummyStringRequired', new mongoose.Schema({
         a: Number,
-        b: {type: String, required: true}
+        b: {type: String, required: true},
+        c: {type: String, required: true, enum: ['hongbosb', 'shijiesb']}
     }))
     , RequireDateDummy = mongoose.model('DummyDateRequired', new mongoose.Schema({
         a: Number,
@@ -31,18 +32,20 @@ mongoose.connect(dbURI)
 
 describe("Randomly fill required fields", function () {
 
-    before(function (done) {
-        dboperator.removeCollections([RequireStringDummy, RequireNumberDummy, RequireObjectIdDummy, RequireBooleanDummy], function (err) {
+    beforeEach(function (done) {
+        dboperator.removeCollections([RequireStringDummy, RequireNumberDummy, RequireObjectIdDummy, RequireBooleanDummy, RequireDateDummy], function (err) {
             expect(err).not.to.exist()
             done()
         })
     })
 
-    it("String", function (done) {
-        dboperator.insertData(RequireStringDummy, [{a: 1}, {a: 2}], function () {
+    it("String, and make it works when type is enum", function (done) {
+        dboperator.insertData(RequireStringDummy, [{a: 1}, {a: 2}], function (err) {
+            expect(err).not.exist()
             RequireStringDummy.find({}, function (err, docs) {
                 expect(docs).to.have.length(2)
                 expect(docs[0].b).to.be.a('string')
+                expect(docs[0].c).to.be.a('string')
                 expect(docs[0].b).not.to.equal(docs[1].b)
                 done()
             })
@@ -84,11 +87,21 @@ describe("Randomly fill required fields", function () {
         })
     })
 
-    it.only("BooleanSchema", function (done) {
+    it("BooleanSchema", function (done) {
         dboperator.insertData(RequireBooleanDummy, [{a: 1}, {a: 2}], function (err) {
             expect(err).not.exist()
             RequireBooleanDummy.find({}, function (err, docs) {
                 expect(docs).to.have.length(2)
+                done()
+            })
+        })
+    })
+
+    it("Only fill required fields", function (done) {
+        dboperator.insertData(RequireBooleanDummy, [{b: true}], function (err) {
+            expect(err).not.exist()
+            RequireBooleanDummy.find({}, function (err, docs) {
+                expect(docs[0].a).not.to.exist()
                 done()
             })
         })
