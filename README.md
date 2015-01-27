@@ -2,6 +2,8 @@
 
 A few test helper to make testing mongoose easier.
 
+[![Build Status](https://travis-ci.org/ufo22940268/mongooose-test.svg?branch=master)](https://travis-ci.org/ufo22940268/mongooose-test)
+
 ##How to use
 
 ###Clean collections
