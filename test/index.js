@@ -7,7 +7,8 @@ var uniqueId = 'c90b6960-0109-11e2-9595-00248c45df8a'
     , ObjectId = mongoose.Types.ObjectId
     , RequireNumberDummy = mongoose.model('DummyNumberRequired', new mongoose.Schema({
         a: Number,
-        b: {type: Number, required: true}
+        b: {type: Number, required: true},
+        c: {type: Number, required: true, default: 2}
     }))
     , RequireStringDummy = mongoose.model('DummyStringRequired', new mongoose.Schema({
         a: Number,
@@ -102,6 +103,17 @@ describe("Randomly fill required fields", function () {
             expect(err).not.exist()
             RequireBooleanDummy.find({}, function (err, docs) {
                 expect(docs[0].a).not.to.exist()
+                done()
+            })
+        })
+    })
+
+    it("Don't insert value when have default value", function (done) {
+        dboperator.insertData(RequireNumberDummy, [{a: 1}], function (err) {
+            expect(err).not.exist()
+            RequireNumberDummy.find({}, function (err, docs) {
+                expect(err).not.exist()
+                expect(docs[0].c).to.equal(2)
                 done()
             })
         })

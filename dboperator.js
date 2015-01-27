@@ -39,7 +39,7 @@ exports.insertData = function (model, docs, done) {
     model.schema.eachPath(function (name, type) {
         if (!isInternal(name) && docs[name] === undefined) {
             docs.forEach(function (t) {
-                if (t[name] == undefined && type.options['required'] !== undefined) {
+                if (t[name] == undefined && type.options['required'] !== undefined && type.options['default'] === undefined) {
                     t[name] = new RandomType(type).toRandom()
                 }
             })
