@@ -8,7 +8,7 @@
     "url": "https://github.com/ufo22940268/mongoose-test"
   },
   "scripts": {
-    "test": "make test"
+    "test": "mocha"
   },
   "license": "MIT",
   "peerDependencies": {
