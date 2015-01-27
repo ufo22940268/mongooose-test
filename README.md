@@ -36,9 +36,8 @@ A few test helper to make testing mongoose easier.
 
 ```
 
-When the inserted document contains some required fields and haven't set value, then mongooseTest will automatically generate some dummy data for its types.
-
-In the above example, we don't need to specify `b` and `c` these two required fields. but after call `insertData` we will still find some strings in these fields.
+When the inserted document contains some required fields that doesn't have value, mongooseTest will automatically generate some dummy data according its type.
+In the above example, we don't need to specify `b` and `c` these two required fields. But after call `insertData` we will still find some strings in these fields.
 So with this strategy, you only need to concentrate on the fields you care, let let `mongoose-test` do the rest work.
 
 ##Install
