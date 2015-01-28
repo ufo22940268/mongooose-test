@@ -124,11 +124,22 @@ describe("Randomly fill required fields", function () {
         })
     })
 
-    it.only("All interface fit for single object parameter", function (done) {
+    it("All interface fit for single object parameter", function (done) {
         dboperator.insertData(RequireNumberDummy, {a: 1}, function () {
             RequireNumberDummy.find({}, function (err, docs) {
                 expect(docs).to.have.length(1)
                 done()
+            })
+        })
+    })
+
+    it("Init data", function (done) {
+        dboperator.insertData(RequireNumberDummy, [{a: 1}, {a: 2}], function () {
+            dboperator.initData(RequireNumberDummy, [{a: 1}, {a: 2}], function () {
+                RequireNumberDummy.find({}, function (err, docs) {
+                    expect(docs).to.have.length(2)
+                    done()
+                })
             })
         })
     })
