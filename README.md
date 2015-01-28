@@ -42,6 +42,13 @@ When the inserted document contains some required fields that doesn't have value
 In the above example, we don't need to specify `b` and `c` these two required fields. But after call `insertData` we will still find some strings in these fields.
 So with this strategy, you only need to concentrate on the fields you care, let let `mongoose-test` do the rest work.
 
+###Feature
+
+**Automatically insert suitable for these conditions:**
+
+[x] Contains required fields of any type.
+[ ] Contains fields where declared unique.
+
 ##Install
 
     npm install --save mongoose-test

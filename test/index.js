@@ -1,4 +1,9 @@
 // make it extremely unlikely that this test unintentionally drops someone's DB
+
+//TODO
+// 1. BookSchema.index({ title: 1, author: 1 }, { unique: true })这种情况下title和author不能够重复
+
+
 var uniqueId = 'c90b6960-0109-11e2-9595-00248c45df8a'
     , dbURI = 'mongodb://localhost/mongodb-wiper-test-' + uniqueId
     , expect = require('chai').expect
@@ -114,6 +119,15 @@ describe("Randomly fill required fields", function () {
             RequireNumberDummy.find({}, function (err, docs) {
                 expect(err).not.exist()
                 expect(docs[0].c).to.equal(2)
+                done()
+            })
+        })
+    })
+
+    it.only("All interface fit for single object parameter", function (done) {
+        dboperator.insertData(RequireNumberDummy, {a: 1}, function () {
+            RequireNumberDummy.find({}, function (err, docs) {
+                expect(docs).to.have.length(1)
                 done()
             })
         })
