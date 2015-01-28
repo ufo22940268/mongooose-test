@@ -46,8 +46,8 @@ So with this strategy, you only need to concentrate on the fields you care, let 
 
 **Automatically insert suitable for these conditions:**
 
-[x] Contains required fields of any type.
-[ ] Contains fields where declared unique.
+- [x]  Contains required fields of any type.
+- [ ]  Contains fields where declared unique.
 
 ##Install
 
