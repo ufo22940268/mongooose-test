@@ -14,7 +14,8 @@ var uniqueId = 'c90b6960-0109-11e2-9595-00248c45df8a'
         b: {type: Number, required: true},
         c: {type: Number, required: true, default: 2},
         d: {type: Number},
-        e: {type: Number}
+        e: {type: Number},
+        f: {type: Number}
     }))
     , RequireStringDummy = mongoose.model('DummyStringRequired', new mongoose.Schema({
         a: Number,
@@ -36,6 +37,7 @@ var uniqueId = 'c90b6960-0109-11e2-9595-00248c45df8a'
     , dboperator = require('../lib/dboperator.js')
 
 RequireNumberDummy.schema.index({d: 1, e: 1}, {unique: true})
+RequireNumberDummy.schema.index({f: 1})
 
 mongoose.connect(dbURI)
 
@@ -147,7 +149,7 @@ describe("Randomly fill required fields", function () {
         })
     })
 
-    it.skip("Should insert random value for unique schema", function (done) {
+    it("Should insert random value for unique schema", function (done) {
         dboperator.insertData(RequireNumberDummy, [{a: 1}, {a:2}], function (err) {
             expect(err).not.exist()
             RequireNumberDummy.find({}, function (err, docs) {
@@ -155,7 +157,7 @@ describe("Randomly fill required fields", function () {
                 expect(docs).to.have.length(2)
                 expect(docs[0]).to.have.property('d')
                     .and.to.not.equal(docs[1].d)
-                //expect(docs[0].d).to.equal(docs[1].d)
+                expect(docs[0]).to.not.have.property('f')
                 done()
             })
         })
