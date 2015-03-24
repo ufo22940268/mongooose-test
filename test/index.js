@@ -64,9 +64,10 @@ describe("Randomly fill required fields", function () {
     })
 
     it("Number", function (done) {
-        dboperator.insertData(RequireNumberDummy, [{a: 1}, {a: 2}], function () {
+        dboperator.insertData(RequireNumberDummy, [{a: 1, d: 9}, {a: 2}], function () {
             RequireNumberDummy.find({}, function (err, docs) {
                 expect(docs).to.have.length(2)
+                expect(docs[0].d).to.equal(9);
                 expect(docs[0].b).to.be.a('number')
                 expect(docs[0].b).not.to.equal(docs[1].b)
                 done()
