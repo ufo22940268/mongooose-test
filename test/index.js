@@ -119,11 +119,12 @@ describe("Randomly fill required fields", function () {
     })
 
     it("Don't insert value when have default value", function (done) {
-        dboperator.insertData(RequireNumberDummy, [{a: 1, d: 3}], function (err) {
+        dboperator.insertData(RequireNumberDummy, [{a: 1, d: 3, b: 2}], function (err) {
             expect(err).not.exist()
             RequireNumberDummy.find({}, function (err, docs) {
                 expect(err).not.exist()
                 expect(docs[0].c).to.equal(2)
+                expect(docs[0].b).to.equal(2)
                 done()
             })
         })
