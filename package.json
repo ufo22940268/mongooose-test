@@ -2,7 +2,7 @@
   "author": "Frank Cheng <ufo22940268@gmail.com>",
   "name": "mongoose-test",
   "description": "Test helpers for mongoose",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/ufo22940268/mongoose-test"
@@ -16,8 +16,8 @@
     "mocha": ">=1.0.0"
   },
   "devDependencies": {
-    "mongodb": "~1",
-    "mongoose": "3.8.21",
+    "mongodb": "^1.4.39",
+    "mongoose": "git://github.com/Automattic/mongoose.git#191b8da8b865c691121f50a18469a037e2db3b5d",
     "nodemon": "~0",
     "chai": "~1"
   },
