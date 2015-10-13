@@ -138,7 +138,7 @@ describe("Randomly fill required fields", function () {
         done()
       })
     })
-  })
+  });
 
   it("Init data", function (done) {
     dboperator.insertData(RequireNumberDummy, [{a: 1}, {a: 2}], function () {
@@ -187,7 +187,7 @@ describe("Randomly fill required fields", function () {
       });
   });
 
-  it("Should insert empty objects", function () {
+  it.only("Should insert empty objects", function () {
     return dboperator
       .init(RequireBooleanDummy, new Array(3))
       .then(function () {
