@@ -186,5 +186,16 @@ describe("Randomly fill required fields", function () {
         return expect(count).to.equal(0);
       });
   });
+
+  it("Should insert empty objects", function () {
+    return dboperator
+      .init(RequireBooleanDummy, new Array(3))
+      .then(function () {
+        return RequireBooleanDummy.count().exec();
+      })
+      .then(function (count) {
+        expect(count).to.equal(3);
+      })
+  })
 });
 

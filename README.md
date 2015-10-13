@@ -6,40 +6,9 @@ A few test helper to make testing mongoose easier.
 
 ##How to use
 
-###Clean collections
 
 
-```javascript
-
-    var mongooseTest = require('mongoose-test')
-    var RequireNumberDummy = mongoose.model('DummyNumberRequired', new mongoose.Schema({
-        a: Number,
-        b: {type: Number, required: true}
-    }))
-
-    mongooseTest.removeCollections([RequireStringDummy], function (err) {
-        done()
-    })
-
-````
-
-###Insert new document
-
-```javascript
-
-    var RequireStringDummy = mongoose.model('DummyStringRequired', new mongoose.Schema({
-        a: Number,
-        b: {type: String, required: true},
-        c: {type: String, required: true, enum: ['hongbosb', 'shijiesb']}
-    }))
-    var mongooseTest = require('mongoose-test')
-        mongooseTest.insertData(RequireStringDummy, [{a: 1}, {a: 2}], function (err) {
-    }
-
-```
-
-
-#Promise style
+##Insert documents with some value.
 
 ```javascript
     var RequireStringDummy = mongoose.model('DummyStringRequired', new mongoose.Schema({
@@ -52,17 +21,23 @@ A few test helper to make testing mongoose easier.
     }
 ```
 
+##Insert documents with all random values. 
+
+```javascript
+    var RequireStringDummy = mongoose.model('DummyStringRequired', new mongoose.Schema({
+        a: Number,
+        b: {type: String, required: true},
+        c: {type: String, required: true, enum: ['hongbosb', 'shijiesb']}
+    }))
+    var mongooseTest = require('mongoose-test')
+        return mongooseTest.init(RequireStringDummy, new Array(3));
+    }
+```
+
 
 When the inserted document contains some required fields that doesn't have value, mongooseTest will automatically generate some dummy data according its type.
 In the above example, we don't need to specify `b` and `c` these two required fields. But after call `insertData` we will still find some strings in these fields.
 So with this strategy, you only need to concentrate on the fields you care, let let `mongoose-test` do the rest work.
-
-###Feature
-
-**Automatically insert suitable values for these conditions:**
-
-- [x]  Contains required fields of any type.
-- [ ]  Contains fields where declared unique.
 
 ##Install
 

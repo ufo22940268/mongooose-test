@@ -2,7 +2,7 @@
   "author": "Frank Cheng <ufo22940268@gmail.com>",
   "name": "mongoose-test",
   "description": "Test helpers for mongoose",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/ufo22940268/mongoose-test"
