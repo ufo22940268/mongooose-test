@@ -163,7 +163,7 @@ describe("Randomly fill required fields", function () {
         done()
       })
     })
-  })
+  });
 
   it("Should support async function", function () {
     //noinspection JSUnresolvedFunction
@@ -187,15 +187,17 @@ describe("Randomly fill required fields", function () {
       });
   });
 
-  it.only("Should insert empty objects", function () {
+  it("Should insert empty objects", function () {
     return dboperator
       .init(RequireBooleanDummy, new Array(3))
-      .then(function () {
+      .then(function (results) {
+        expect(results).to.have.length(3);
+        expect(results[1]).to.have.property('_id');
         return RequireBooleanDummy.count().exec();
       })
       .then(function (count) {
         expect(count).to.equal(3);
       })
-  })
+  });
 });
 
