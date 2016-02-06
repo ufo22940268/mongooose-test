@@ -1,5 +1,8 @@
 # mongooose-test
 
+## Deprecated
+I found the project will be broken when mongoose upgrade and add some features.
+
 A few test helper to make testing mongoose easier.
 
 [![Build Status](https://travis-ci.org/ufo22940268/mongoose-test.svg?branch=master)](https://travis-ci.org/ufo22940268/mongoose-test)
