@@ -117,7 +117,7 @@ describe("Randomly fill required fields", function () {
         done()
       })
     })
-  })
+  });
 
   it("Don't insert value when have default value", function (done) {
     dboperator.insertData(RequireNumberDummy, [{a: 1, d: 3, b: 2}], function (err) {
@@ -197,6 +197,14 @@ describe("Randomly fill required fields", function () {
       })
       .then(function (count) {
         expect(count).to.equal(3);
+      })
+  });
+
+  it("Should support insert only one document", function () {
+    return dboperator
+      .init(RequireBooleanDummy, {})
+      .then(function (result) {
+        expect(result).not.to.be.an('Array');
       })
   });
 });
